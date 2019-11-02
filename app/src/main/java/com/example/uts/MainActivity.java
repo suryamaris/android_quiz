@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void mc(View view) {
-        Intent intent = new Intent(MainActivity.this, Multiple_Choice.class);
+        Intent intent = new Intent(MainActivity.this, multiple_choice_Activity.class);
         System.out.println("MC");
         startActivity(intent);
     }

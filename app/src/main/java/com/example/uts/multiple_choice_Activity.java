@@ -1,14 +1,14 @@
 package com.example.uts;
 
-import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Multiple_Choice extends AppCompatActivity {
+import android.os.Bundle;
 
+public class multiple_choice_Activity extends AppCompatActivity {
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.multiple_choice);
-
+        setContentView(R.layout.activity_multiple_choice_);
     }
 }
