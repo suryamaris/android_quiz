@@ -10,10 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Multiple_Choice extends AppCompatActivity {
     private TextView question;
     private Button ansA, ansB, ansC, ansD;
     private RequestQueue requestQueue;
+    private List<MultipleChoiceQuestion> multipleChoiceQuestions;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,5 +28,6 @@ public class Multiple_Choice extends AppCompatActivity {
         ansC = findViewById(R.id.ans_c);
         ansD = findViewById(R.id.ans_d);
         requestQueue = Volley.newRequestQueue(this);
+        multipleChoiceQuestions = new ArrayList<>();
     }
 }
