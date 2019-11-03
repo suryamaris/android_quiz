@@ -44,6 +44,7 @@
         android:textColor="#FFFFFF"
         android:text="Multiple Choice"
         android:textSize="20dp"
+        android:onClick="mc"
         app:layout_constraintBottom_toTopOf="@+id/Asynonym"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
