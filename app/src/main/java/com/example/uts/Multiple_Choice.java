@@ -41,6 +41,14 @@ public class Multiple_Choice extends AppCompatActivity {
         getQuestionFromJsonRandomly();
     }
 
+    private void setQuestionToLayout(MultipleChoiceQuestion mcq) {
+        question.setText(mcq.getQuestion());
+        ansA.setText(mcq.getOption_1());
+        ansB.setText(mcq.getOption_2());
+        ansC.setText(mcq.getOption_3());
+        ansD.setText(mcq.getOption_4());
+    }
+
     private void getQuestionFromJsonRandomly() {
         String url = "https://api.myjson.com/bins/19rsrw";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -64,6 +72,7 @@ public class Multiple_Choice extends AppCompatActivity {
                                 multipleChoiceQuestions.add(mcq);
                             }
                             Collections.shuffle(multipleChoiceQuestions);
+                            setQuestionToLayout(multipleChoiceQuestions.get(0));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
