@@ -23,11 +23,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class Multiple_Choice extends AppCompatActivity {
+    private RequestQueue requestQueue;
+    private List<MultipleChoiceQuestion> multipleChoiceQuestions = new ArrayList<>();
     private TextView question;
     private Button ansA, ansB, ansC, ansD;
-    private RequestQueue requestQueue;
-    private List<MultipleChoiceQuestion> multipleChoiceQuestions;
 
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.multiple_choice);
@@ -37,7 +38,6 @@ public class Multiple_Choice extends AppCompatActivity {
         ansC = findViewById(R.id.ans_c);
         ansD = findViewById(R.id.ans_d);
         requestQueue = Volley.newRequestQueue(this);
-        multipleChoiceQuestions = new ArrayList<>();
         getQuestionFromJsonRandomly();
     }
 
