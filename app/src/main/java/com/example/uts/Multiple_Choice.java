@@ -1,11 +1,14 @@
 package com.example.uts;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -26,7 +29,7 @@ import java.util.List;
 public class Multiple_Choice extends AppCompatActivity implements View.OnClickListener {
     private RequestQueue requestQueue;
     private List<MultipleChoiceQuestion> multipleChoiceQuestions = new ArrayList<>();
-    private TextView question;
+    private TextView question, value, description;
     private Button ansA, ansB, ansC, ansD;
 
     @Override
@@ -94,6 +97,27 @@ public class Multiple_Choice extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-
+        Button beenClicked = (Button) v;
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.mc_description, null);
+        dialog.setView(dialogView);
+        dialog.setCancelable(false);
+        value = dialogView.findViewById(R.id.value);
+        if (beenClicked.getText().toString().equals(multipleChoiceQuestions.get(1).getAnswer())) {
+            value.setText("Correct");
+        } else {
+            value.setText("Incorrect");
+        }
+        description = dialogView.findViewById(R.id.description);
+        description.setText(multipleChoiceQuestions.get(1).getDescription());
+        dialog.setPositiveButton("Next", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                setQuestionToLayout(multipleChoiceQuestions.get(1));
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }
