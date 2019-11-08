@@ -116,7 +116,7 @@ public class Multiple_Choice extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 i++;
-                setQuestionToLayout(multipleChoiceQuestions.get(1));
+                setQuestionToLayout(multipleChoiceQuestions.get(i));
                 dialog.dismiss();
             }
         });
