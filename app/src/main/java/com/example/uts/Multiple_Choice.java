@@ -1,6 +1,7 @@
 package com.example.uts;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Multiple_Choice extends AppCompatActivity {
+public class Multiple_Choice extends AppCompatActivity implements View.OnClickListener {
     private RequestQueue requestQueue;
     private List<MultipleChoiceQuestion> multipleChoiceQuestions = new ArrayList<>();
     private TextView question;
@@ -37,6 +38,10 @@ public class Multiple_Choice extends AppCompatActivity {
         ansB = findViewById(R.id.ans_b);
         ansC = findViewById(R.id.ans_c);
         ansD = findViewById(R.id.ans_d);
+        ansA.setOnClickListener(this);
+        ansB.setOnClickListener(this);
+        ansC.setOnClickListener(this);
+        ansD.setOnClickListener(this);
         requestQueue = Volley.newRequestQueue(this);
         getQuestionFromJsonRandomly();
     }
@@ -85,5 +90,10 @@ public class Multiple_Choice extends AppCompatActivity {
                     }
                 });
         requestQueue.add(request);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
