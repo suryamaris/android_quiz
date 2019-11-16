@@ -1,7 +1,5 @@
 package com.example.uts;
-master
 import android.content.DialogInterface;
-application1
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
