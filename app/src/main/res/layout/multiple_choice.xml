@@ -32,7 +32,7 @@
     <Button
         android:id="@+id/ans_a"
         android:layout_width="130dp"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,7 @@
     <Button
         android:id="@+id/ans_b"
         android:layout_width="130dp"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Button"
         android:backgroundTint="@color/colorPrimary"
@@ -57,7 +57,7 @@
     <Button
         android:id="@+id/ans_c"
         android:layout_width="130dp"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/colorPrimary"
         android:textColor="#FFFFFF"
@@ -66,16 +66,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ans_b" />
 
-    <Button
-        android:id="@+id/ans_d"
-        android:layout_width="130dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="#FFFFFF"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ans_c" />
 </androidx.constraintlayout.widget.ConstraintLayout>
