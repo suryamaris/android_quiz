@@ -1,9 +1,13 @@
 package com.example.uts;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -21,11 +25,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Multiple_Choice extends AppCompatActivity {
+public class Multiple_Choice extends AppCompatActivity implements View.OnClickListener {
     private RequestQueue requestQueue;
     private List<MultipleChoiceQuestion> multipleChoiceQuestions = new ArrayList<>();
     private TextView question;
-    private Button ansA, ansB, ansC, ansD;
+    private Button ansA, ansB, ansC;
+    private int i = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,21 +40,27 @@ public class Multiple_Choice extends AppCompatActivity {
         ansA = findViewById(R.id.ans_a);
         ansB = findViewById(R.id.ans_b);
         ansC = findViewById(R.id.ans_c);
-        ansD = findViewById(R.id.ans_d);
+        ansA.setOnClickListener(this);
+        ansB.setOnClickListener(this);
+        ansC.setOnClickListener(this);
         requestQueue = Volley.newRequestQueue(this);
         getQuestionFromJsonRandomly();
     }
 
     private void setQuestionToLayout(MultipleChoiceQuestion mcq) {
         question.setText(mcq.getQuestion());
-        ansA.setText(mcq.getOption_1());
-        ansB.setText(mcq.getOption_2());
-        ansC.setText(mcq.getOption_3());
-        ansD.setText(mcq.getOption_4());
+        List<String> option = new ArrayList<>();
+        option.add(mcq.getAnswer());
+        option.add(mcq.getOption_1());
+        option.add(mcq.getOption_2());
+        Collections.shuffle(option);
+        ansA.setText(option.get(0));
+        ansB.setText(option.get(1));
+        ansC.setText(option.get(2));
     }
 
     private void getQuestionFromJsonRandomly() {
-        String url = "https://api.myjson.com/bins/19rsrw";
+        String url = "https://api.myjson.com/bins/110iuy";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -65,8 +76,6 @@ public class Multiple_Choice extends AppCompatActivity {
                                 mcq.setAnswer(jsonObject.getString("answer"));
                                 mcq.setOption_1(jsonObject.getString("option_1"));
                                 mcq.setOption_2(jsonObject.getString("option_2"));
-                                mcq.setOption_3(jsonObject.getString("option_3"));
-                                mcq.setOption_4(jsonObject.getString("option_4"));
                                 mcq.setDescription(jsonObject.getString("description"));
                                 multipleChoiceQuestions.add(mcq);
                             }
@@ -84,6 +93,33 @@ public class Multiple_Choice extends AppCompatActivity {
                     }
                 });
         requestQueue.add(request);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Button beenClicked = (Button) v;
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.mc_description, null);
+        dialog.setView(dialogView);
+        dialog.setCancelable(true);
+        TextView value = dialogView.findViewById(R.id.value);
+        if (beenClicked.getText().toString().equals(multipleChoiceQuestions.get(i).getAnswer())) {
+            value.setText("Correct");
+        } else {
+            value.setText("Incorrect");
+        }
+        TextView description = dialogView.findViewById(R.id.description);
+        description.setText(multipleChoiceQuestions.get(i).getDescription());
+        dialog.setPositiveButton("Next", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                i++;
+                setQuestionToLayout(multipleChoiceQuestions.get(i));
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }
 
